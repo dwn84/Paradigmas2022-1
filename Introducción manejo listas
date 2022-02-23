@@ -1,0 +1,41 @@
+#lang racket
+;Creación de pareja de datos
+(cons 1 2)
+;obtener la cabeza
+(car (cons 1 2))
+;obtener el apuntador siguiente(con todo su contenido)
+(cdr (cons 1 2))
+;creación de pareja anidad: lista enlazada simple
+(define miPareja
+  (cons 1
+        (cons 3
+              (cons 5
+                    (cons 7
+                          (cons 9 null))))
+        )
+  )
+;creando una lista de datos(pareja anidada)
+(define otra-Lista (list 'a 'b 'c)
+)
+(define miLista (list 1 2 3 4 5 6 7 8 9 0))
+(define miListaX2 (list 55 11 22 33 44 66 77 88 99 101))
+
+;funciones para aplicar a lista
+(define (triple x)
+  (* x 3))
+(define (calcular x y)
+  (+ x y))
+
+;obtener datos específicos(segundo)
+(car(cdr otra-Lista))
+;simplificar
+(cadr otra-Lista)
+;aplicar una función a todos y cada uno de los datos en la lista
+;no se altera la lista original
+(map triple miLista)
+(map calcular miLista miListaX2)
+#|Validación booleana en lista|#
+(define (mayor-edad n) (>= n 18))
+(andmap mayor-edad miLista)
+#|retornar elementos que cumplen una determinada condición|#
+(filter mayor-edad miListaX2)
