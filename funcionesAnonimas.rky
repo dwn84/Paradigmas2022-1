@@ -1,0 +1,50 @@
+#lang racket
+;definición función anónima
+((lambda (x) (* x 2)) 8)
+(define (x y) (* y 2))
+
+(define (salut jornada)
+  (lambda (persona)
+    (string-append jornada ", " persona)
+    )
+  )
+
+(define (potencia x y)
+  (if (= y 0)
+      1
+      (* x (potencia x (- y 1))))  
+  )
+;Curring o jerarquización de parámetros
+(define superpotencia
+  (lambda (x)
+    (lambda (y)
+      (potencia x y)
+      )
+    )
+  )
+;invocación del curring
+((superpotencia 2)8)
+;función de procesamiento de elementos
+;correspondientes en pareja
+((lambda (p1 p2)
+    (cons (+ (car p1) (car p2))
+          (+ (cdr p1) (cdr p2))))
+ ;parámetros de la función
+ (cons 8 2)
+ (cons 7 4) 
+ )
+
+;función con múltiples cantidades de parámetros
+(define f (case-lambda
+            [() 10]
+            [(x) (* x 3)]
+            [(x y) (list (* y 2) (* x 2))]
+            ;creación de la función al interior del mapeo
+            [n (map (lambda(x)(* x 2)) n)]))
+
+;Pendiente por revisar
+(define (area a b)
+  (/ (* a b) 2))
+(define (calcular-areas as bs)
+  (map area as bs))
+
