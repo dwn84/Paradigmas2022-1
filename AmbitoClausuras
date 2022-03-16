@@ -1,0 +1,50 @@
+//Los objetos son ciudadanos de primera clase
+//Ejemplo en JavaScript
+
+const objetoX = function(parametroN){
+	return "Hello " +parametroN	
+}
+
+//Es diferente invocar la definición de la expresión
+
+objetoX
+objetoX()
+
+//Manejo de ámbitos - local - global
+
+const a = "alpha"
+function global(){
+	const b = "eof"
+	function local(){
+		const c = "wtf"
+		console.log(a+b+c)
+	}
+	console.log(a+b+c)	
+	return local()
+}
+
+//Tenemos un error al tratar de llamar la constante c, esta fuera de ámbito
+
+
+//La clausura envuelve una función y retorna la definición de la función:
+
+const a = "alpha"
+function global(){
+	const b = "eof"
+	function local(){
+		const c = "wtf"
+		console.log(a+b+c)
+	}
+		
+	return local // return local()
+}
+
+global
+global()
+global()()
+//equivalente a llamadas en racket tales como:
+/*
+global
+(global)
+((global))
+*/
