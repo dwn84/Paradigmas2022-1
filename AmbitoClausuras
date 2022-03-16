@@ -71,3 +71,20 @@ const miContadorX = (function(){
 	}
 //}
 })() //define la clausura - envolvente
+
+
+miContadorX
+miContadorX.decrementar
+miContadorX.decrementar()
+
+function etiqueta_html(tag){
+  function contenido_html(msg){
+    console.log('<' + tag +'>' + msg + '</' + tag + '>')
+  }
+  return contenido_html
+}
+
+etiqueta_html
+etiqueta_html()
+etiqueta_html()()
+etiqueta_html("h1")("hello")
