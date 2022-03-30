@@ -1,0 +1,58 @@
+import scala.annotation.tailrec
+
+object MyClass extends App{
+
+   var x = 99
+   //Bloque de código define - entregar evaluación de la expresión
+   val y = {
+       var m = 99
+       val n = 88
+       m * n
+   }
+   println(y)
+   println(f"Contenido de la variable $x")
+   println(f"Contenido de la variable ${x*2}")
+   println(f"Contenido de la variable $x%.3f")
+   
+   val numeritos = List(1,2,3,4,5,6,7,8)
+   val nombres = List("Ana","Andrea","Angelica","Alberto")
+   val total = numeritos.map{x=>x*2}
+   println(nombres.map(_.toUpperCase()))
+   println(total)
+
+   def fibonacci(n: Int):Int={
+       n match {
+           case 0 => 0
+           case 1 => 1
+           case _ => fibonacci(n-1)+fibonacci(n-2)
+       }
+   }
+   @tailrec
+   def fibonacciTailRecursive(n: Int,a:Int,b:Int):Int = {
+       if(n<=1) b
+       else fibonacciTailRecursive((n-1),b,(b+a))
+   }
+   def factorial(n:Int):BigInt = {
+       if(n<=1) 1
+       else n*factorial(n-1)
+   }
+   @tailrec
+   def factorialTailRecursive(n: Int,total:BigInt):BigInt = {
+       if(n<=1) total
+       else factorialTailRecursive((n-1),n*total)
+   }
+   
+   def factorialR(n: Int):BigInt = {
+       def factorialRInterno(x: Int,total:BigInt):BigInt = {
+            if(x<=1) total
+            else factorialRInterno((x-1),x*total)
+       }
+       factorialRInterno(n,1)
+   }
+   
+   //println(fibonacci(555))
+   println(fibonacciTailRecursive(555,0,1))
+   println(factorial(555))
+   println(factorialTailRecursive(555,0))
+   println(factorialR(555))
+}
