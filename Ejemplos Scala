@@ -55,4 +55,41 @@ object MyClass extends App{
    println(factorial(555))
    println(factorialTailRecursive(555,0))
    println(factorialR(555))
+   
+   
+       def llamadaMetodoPorValor(x:Long):Unit = {
+        println(f"parámetro manipulado por valor : 4932766050060897")
+        println(f"parámetro manipulado por valor : 4932766050060897")
+    }
+    
+    def llamadaMetodoPorNombre(x: => Long):Unit = {
+        println(f"parámetro manipulado por nombre: System.nanoTime()")
+        println(f"parámetro manipulado por nombre: System.nanoTime()")
+    }
+
+
+    //manipulación de parámetros
+    llamadaMetodoPorValor(System.nanoTime())
+    llamadaMetodoPorNombre(System.nanoTime())
+    
+    val n = 55
+    
+    val m = {
+        n * 2
+    }
+
+    def metodoInfinito():Int = 1 + metodoInfinito()
+    def metodoParametrosMixtos(x:Int, y: => Long): Unit  = println(x)
+    
+    
+    //Verificar el impacto de postergar la evaluación de una expresión
+    metodoParametrosMixtos(m,metodoInfinito())
+    metodoParametrosMixtos(metodoInfinito(),m)
+    
+    //Parámetros opcionales
+    def procesarImagen(formato: String, ancho:Int = 1080, alto:Int = 720): 
+    String = s"procesando imagen de dimensiones: $ancho X $alto"
+    print(procesarImagen("jpg"))
+    print(procesarImagen(alto = 640,formato ="jpg"))
 }
+
