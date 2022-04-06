@@ -1,3 +1,4 @@
+import scala.collection.mutable
 import scala.annotation.tailrec
 
 object MyClass extends App{
@@ -91,5 +92,54 @@ object MyClass extends App{
     String = s"procesando imagen de dimensiones: $ancho X $alto"
     print(procesarImagen("jpg"))
     print(procesarImagen(alto = 640,formato ="jpg"))
+    
+
+
+
+  val lista = List(List(1,3,5,7),List(2,4,8,10),List(7,11,13,17))
+  println(lista.flatten)
+  println(lista.map((x:List[Int])=> x.map(n=>n*2)))
+  println(lista.map((x:List[Int])=> x.map(_*2)))
+  println(lista.map{(x:List[Int])=> x.map(_*2)})
+  println{lista.map((x:List[Int])=> x.map(_*2)).flatten}
+  println(lista.flatMap{(x:List[Int])=> x.map(_*2)})
+
+  val listaX = List(1,2,3,4,5,6)
+
+
+
+  val nombres = List("Ana","Angela","Abelardo","Alvaro")
+  println(nombres.flatten)
+  println(nombres.flatMap(n=>n.toUpperCase()))
+  println(nombres.flatMap(n=>n.toUpperCase()).distinct)
+  println(nombres.isEmpty)
+  println(nombres.nonEmpty)
+  println(nombres.contains("Ana"))
+  println(nombres contains "Ana")
+
+  val nombresX = Set("Ana","Angela","Abelardo","Alvaro")
+  println(nombres + "Andrea")
+  println(nombresX + "Andrea")
+  println(nombresX + "Jaime")
+  println(nombresX intersect Set("Melina","Ana","Esperanza"))
+  println(nombresX union Set("Melina","Ana","Esperanza"))
+
+
+  val datosMutables = mutable.Set(1,2,3)
+  println(datosMutables + 99)
+  println(datosMutables)
+
+  datosMutables += 99
+  println(datosMutables)
+
+  datosMutables -= 3
+  println(datosMutables)
+
+  datosMutables.filterInPlace(x=>x%2==0)
+  println(datosMutables)
+  
+
+
+
 }
 
