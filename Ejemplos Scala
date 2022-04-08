@@ -138,6 +138,43 @@ object MyClass extends App{
   datosMutables.filterInPlace(x=>x%2==0)
   println(datosMutables)
   
+  val miMapa = Map(1->"AAA",2->"BBB",3->"TTT",4->"DDDD",3->"CCC")
+  println(miMapa)
+  println(miMapa.keySet)
+  println(miMapa.values)
+  println(miMapa(3))//invocar método apply - método por defecto...
+  println(miMapa.get(4))
+  println(miMapa.get(0))
+  //println(miMapa(0))
+  println(miMapa.getOrElse(8,"Error 404 data not found"))
+  println(miMapa-3)
+  println(miMapa.contains(3))
+  println(miMapa++Map(5->"UUU",6->"III",7->"PPP"))
+  println(miMapa+(8->"RRR"))
+
+  val otroMapa = mutable.Map(99->"AAA",88->"BBB",77->"TTT",66->"DDDD",55->"CCC")
+  val unMapaMas = mutable.Map(44->"QQQ",33->"WWW",22->"NNN")
+  println(otroMapa-=88)
+  otroMapa+=(11->"ÑÑÑ")
+  println(otroMapa)
+
+  //Trabajo con recorrido de estructura
+/*
+  nombresX.foreach(x => x.toUpperCase())
+  nombresX.foreach{println}
+*/
+  val nombresXYZ = List("Ana","Angela","Abelardo","Alvaro")
+  val apellidosXYZ = List("Rendon","Mesa","Perez","Restrepo")
+  val data = List(1,2,3,4,5,6,7,8,9)
+
+  for(x <- nombresXYZ if x.endsWith("a")){
+    println(x)
+  }//Lista de compresion
+
+  for(n <-nombresXYZ; p <- apellidosXYZ if n.endsWith("a")){
+    println(s"$n - $p")
+  }//Lista de compresion
+
 
 
 
