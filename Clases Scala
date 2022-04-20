@@ -1,0 +1,72 @@
+import scala.collection.mutable
+
+class ClasePersona
+//constructor por defecto
+(val nombre: String, val edad: Int) {
+
+  private var _nombre = nombre
+
+  //getter
+  def Nombre=_nombre
+  //setter
+  def Nombre_(nombreNuevo: String)={
+    _nombre = nombreNuevo
+  }
+
+  //Sobrecarga de contructor
+  //Contructores auxiliares
+  def this(nombre: String) = {
+    this(nombre,99)
+  }
+  def this(edad:Int) = {
+    this("N.N.", edad)
+  }
+  def this() = {
+    this("N.N.", 99)
+  }
+
+}
+
+
+
+
+class Punto2D(xc: Int, yc: Int) {
+  val x: Int = xc
+  val y: Int = yc
+
+  def mover(incX: Int, incY: Int): Punto2D = new Punto2D(x + incX, y + incY)
+
+  def operando (x:Int) = print("wtf")
+
+  def +(otroPunto: Punto2D): Punto2D =
+    new Punto2D(x + otroPunto.x, y + otroPunto.y)
+
+  def +(inc: Int): Punto2D =
+    new Punto2D( x+inc, y+inc)
+
+  def descripcion = "(" + x + "," + y + ")"
+
+
+}
+
+
+object MyMain extends App{
+
+  val personita = new ClasePersona("Esperanza",39)
+  val personita2 = new ClasePersona(39)
+  val personita3 = new ClasePersona("Leonel")
+  val personita4 = new ClasePersona()
+  personita.nombre
+  personita.edad
+
+  val mipunto = new Punto2D(5,5)
+  val mipunto2 = new Punto2D(5,5)
+  mipunto.operando(88)
+  mipunto operando 88
+
+  mipunto.+(55)
+  mipunto + 55
+
+  mipunto.+(mipunto2)
+  mipunto + mipunto2  
+}
