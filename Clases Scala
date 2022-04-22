@@ -1,4 +1,6 @@
 import scala.collection.mutable
+import scala.language.postfixOps //Habilita la expresion postFija
+
 
 class ClasePersona
 //constructor por defecto
@@ -46,6 +48,14 @@ class Punto2D(xc: Int, yc: Int) {
 
   def descripcion = "(" + x + "," + y + ")"
 
+  def calibrar(cambiarCuadrante:Int):Unit = println("Calibrando")
+
+  def borrarPunto: String = "Borrando..."
+
+  def unary_~ : String = "Soy el operador del destructor!!! Bwajajajajajaja"
+  def unary_! : String = "Yo no estoy!!"
+  def unary_- : String = "Soy negativo!!"
+  def unary_+ : String = "Soy positivo!!"
 
 }
 
@@ -59,14 +69,40 @@ object MyMain extends App{
   personita.nombre
   personita.edad
 
-  val mipunto = new Punto2D(5,5)
+val mipunto = new Punto2D(5,5)
   val mipunto2 = new Punto2D(5,5)
   mipunto.operando(88)
   mipunto operando 88
-
+  //azucar sintactico
   mipunto.+(55)
-  mipunto + 55
-
+  mipunto + 55 //notacion infija - inorden
+  mipunto.calibrar(888)
+  mipunto calibrar 888
   mipunto.+(mipunto2)
-  mipunto + mipunto2  
+  mipunto + mipunto2
+  mipunto.borrarPunto //notacion postorden - postfija
+  //import scala.language.postfixOps
+  println(mipunto borrarPunto)
+  //preorden -prefijo: + - ! ~
+  //Función unaria
+  println(~mipunto)
+  println(!mipunto)
+  println(-mipunto)
+  println(+mipunto)
+  
+  //Actividad por realizar:
+   //Crear una clase que represente una novela y otra clase para el autores.
+  //
+  //Para  la novela se definen los siguientes atributos: Nombre, año de publicación, autor. Definir un método que permita mostrar la edad del autor en el momento de publicación del libro. Crear un método que permita retornar una copia de la novela pero con una nueva fecha de publicación. Crear método que permita validar si un libro ha sido escrito por un autor específico.
+  //
+  //Para  los autores se definen los siguientes atributos: Nombre, Apellido, año de nacimiento. Definir un método que retorne el nombre completo.
+  val GabrielGarciaMarquez =new autor("gabriel", "Garcia",1927)
+  val PaoloCoelo =new autor("Paolo", "Coelo",1947)
+  val cienAnniosSoledad = new novela("Cien años de soledad", 1967,GabrielGarciaMarquez)
+
+  GabrielGarciaMarquez NombreCompleto
+    cienAnniosSoledad.mostrarEdadAutor
+  cienAnniosSoledad.ValidarAutor(GabrielGarciaMarquez)
+  cienAnniosSoledad.ValidarAutor(PaoloCoelo)
+
 }
