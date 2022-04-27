@@ -1,35 +1,45 @@
 import scala.collection.mutable
-import scala.language.postfixOps //Habilita la expresion postFija
+import scala.language.postfixOps
+
+abstract class Mamifero(val nombreCientifico: String, val tipo: String ="Salvaje", var nivelInteligencia: Int ){
+  //inicialización de campos de la superClase
+  val peso : Double = 0.0
 
 
-class ClasePersona
-//constructor por defecto
-(val nombre: String, val edad: Int) {
+  //Método abstracto
+  def hablar(): String
 
-  private var _nombre = nombre
+  def caminar(): String = "Desplazandose en dos patas"
+}
 
-  //getter
-  def Nombre=_nombre
-  //setter
-  def Nombre_(nombreNuevo: String)={
-    _nombre = nombreNuevo
-  }
+class HomoSapiens(nombrePropio: String, override val tipo: String, override val nombreCientifico: String) extends Mamifero("Homo Sapiens Sapiens","Domesticado",100){
 
-  //Sobrecarga de contructor
-  //Contructores auxiliares
-  def this(nombre: String) = {
-    this(nombre,99)
-  }
-  def this(edad:Int) = {
-    this("N.N.", edad)
-  }
-  def this() = {
-    this("N.N.", 99)
-  }
+  var nombreHumano = nombrePropio
+  def hablar():String = "Hola mundo"
 
 }
 
+class Felino() extends Mamifero("Felinus linus", "Deidad", 88){
+  def hablar():String = "Miau miau...."
+  override def caminar(): String = "Desplazandose en cuatro patas"
+}
 
+//Objeto compañero de clase
+object Rifa{
+  private var Id = 0
+  def apply(): Unit =
+  {
+    Id = 99
+  }
+}
+
+class Rifa{
+  private var Id = 0
+  def nuevaBoleta(): Int ={
+    Id+= 1
+    Id
+  }
+}
 
 
 class Punto2D(xc: Int, yc: Int) {
@@ -57,11 +67,49 @@ class Punto2D(xc: Int, yc: Int) {
   def unary_- : String = "Soy negativo!!"
   def unary_+ : String = "Soy positivo!!"
 
+  def apply(): String  = s"Coornadas actuales: ${x} ${y}"
+  def apply(x: Int): String =  s"Coornadas actuales: ${x} ${y} y el el parámetro es ${x}"
+
 }
 
 
-object MyMain extends App{
+object MyMain extends App {
 
+  //Agrupación de objetos
+  val gatos : List[Felino] = new Felino()::new Felino()::new Felino()::Nil
+  val Zoologico: List[Mamifero] = new HomoSapiens("Adan Smith","Depredador","Sapiens sapiens"):: new Felino() ::Nil
+
+  Zoologico.foreach(x => println(x.hablar()))
+
+  var ejemploA = new Rifa() //Objeto particular - Nueva Instancia
+  var ejemploB = Rifa()//Objeto Singleton - Isntancia única
+  //El sistema realiza llamada al método apply en el objeto compañero de la clase (List y Array)
+  var listaXYZ = List(1,2,3,4)
+  var arregloXYZ = Array(1,2,3,4)
+
+
+
+  print(s"Boleta vendida, # ${ejemploA.nuevaBoleta()}")
+  print(s"Boleta vendida, # ${ejemploA.nuevaBoleta()}")
+  print(s"Boleta vendida, # ${ejemploA.nuevaBoleta()}")
+  print(s"Boleta vendida, # ${ejemploA.nuevaBoleta()}")
+
+  System.out.println()
+  //Crear una clase que represente una novela y otra clase para el autores.
+  //
+  //Para  la novela se definen los siguientes atributos: Nombre, año de publicación, autor. Definir un método que permita mostrar la edad del autor en el momento de publicación del libro. Crear un método que permita retornar una copia de la novela pero con una nueva fecha de publicación. Crear método que permita validar si un libro ha sido escrito por un autor específico.
+  //
+  //Para  los autores se definen los siguientes atributos: Nombre, Apellido, año de nacimiento. Definir un método que retorne el nombre completo.
+ /*val GabrielGarciaMarquez =new autor("gabriel", "Garcia",1927)
+  val PaoloCoelo =new autor("Paolo", "Coelo",1947)
+  val cienAnniosSoledad = new novela("Cien años de soledad", 1967,GabrielGarciaMarquez)
+
+  GabrielGarciaMarquez NombreCompleto
+    cienAnniosSoledad.mostrarEdadAutor
+  cienAnniosSoledad.ValidarAutor(GabrielGarciaMarquez)
+  cienAnniosSoledad.ValidarAutor(PaoloCoelo)
+
+*/
   val personita = new ClasePersona("Esperanza",39)
   val personita2 = new ClasePersona(39)
   val personita3 = new ClasePersona("Leonel")
@@ -69,7 +117,12 @@ object MyMain extends App{
   personita.nombre
   personita.edad
 
-val mipunto = new Punto2D(5,5)
+  val mipunto = new Punto2D(5,5)
+  //formas de llamar al método apply - método estratégico de invocación rápida
+  print(mipunto())
+  print(mipunto.apply())
+  print(mipunto(888))
+  print(mipunto.apply(888))
   val mipunto2 = new Punto2D(5,5)
   mipunto.operando(88)
   mipunto operando 88
@@ -89,20 +142,96 @@ val mipunto = new Punto2D(5,5)
   println(!mipunto)
   println(-mipunto)
   println(+mipunto)
-  
-  //Actividad por realizar:
-   //Crear una clase que represente una novela y otra clase para el autores.
-  //
-  //Para  la novela se definen los siguientes atributos: Nombre, año de publicación, autor. Definir un método que permita mostrar la edad del autor en el momento de publicación del libro. Crear un método que permita retornar una copia de la novela pero con una nueva fecha de publicación. Crear método que permita validar si un libro ha sido escrito por un autor específico.
-  //
-  //Para  los autores se definen los siguientes atributos: Nombre, Apellido, año de nacimiento. Definir un método que retorne el nombre completo.
-  val GabrielGarciaMarquez =new autor("gabriel", "Garcia",1927)
-  val PaoloCoelo =new autor("Paolo", "Coelo",1947)
-  val cienAnniosSoledad = new novela("Cien años de soledad", 1967,GabrielGarciaMarquez)
 
-  GabrielGarciaMarquez NombreCompleto
-    cienAnniosSoledad.mostrarEdadAutor
-  cienAnniosSoledad.ValidarAutor(GabrielGarciaMarquez)
-  cienAnniosSoledad.ValidarAutor(PaoloCoelo)
+
+
+  val lista = List(List(1,3,5,7),List(2,4,8,10),List(7,11,13,17))
+  println(lista.flatten)
+  println(lista.map((x:List[Int])=> x.map(n=>n*2)))
+  println(lista.map((x:List[Int])=> x.map(_*2)))
+  println(lista.map{(x:List[Int])=> x.map(_*2)})
+  println{lista.map((x:List[Int])=> x.map(_*2)).flatten}
+  println(lista.flatMap{(x:List[Int])=> x.map(_*2)})
+
+  val listaX = List(1,2,3,4,5,6)
+
+
+
+  val nombres = List("Ana","Angela","Abelardo","Alvaro")
+  println(nombres.flatten)
+  println(nombres.flatMap(n=>n.toUpperCase()))
+  println(nombres.flatMap(n=>n.toUpperCase()).distinct)
+  println(nombres.isEmpty)
+  println(nombres.nonEmpty)
+  println(nombres.contains("Ana"))
+  println(nombres contains "Ana")
+
+  val nombresX = mutable.Set("Ana","Angela","Abelardo","Alvaro")
+  println(nombres + "Andrea")
+  println(nombresX + "Andrea")
+  println(nombresX + "Jaime")
+  println(nombresX intersect Set("Melina","Ana","Esperanza"))
+  println(nombresX union Set("Melina","Ana","Esperanza"))
+
+
+  val datosMutables = mutable.Set(1,2,3)
+  println(datosMutables + 99)
+  println(datosMutables)
+
+  datosMutables += 99
+  println(datosMutables)
+
+  datosMutables -= 3
+  println(datosMutables)
+
+  datosMutables.filterInPlace(x=>x%2==0)
+  println(datosMutables)
+
+  //Describa el funcionamiento de las siguientes expresiones:
+/*
+  nombresX ++ Set(...)
+  nombresX -- Set(...)
+  nombresX & Set(...)
+  nombresX &~ Set(...)
+  nombresX diff Set(...)
+  nombresX | Set(...)*/
+
+  val miMapa = Map(1->"AAA",2->"BBB",3->"TTT",4->"DDDD",3->"CCC")
+  println(miMapa)
+  println(miMapa.keySet)
+  println(miMapa.values)
+  println(miMapa(3))//invocar método apply - método por defecto...
+  println(miMapa.get(4))
+  println(miMapa.get(0))
+  //println(miMapa(0))
+  println(miMapa.getOrElse(8,"Error 404 data not found"))
+  println(miMapa-3)
+  println(miMapa.contains(3))
+  println(miMapa++Map(5->"UUU",6->"III",7->"PPP"))
+  println(miMapa+(8->"RRR"))
+
+  val otroMapa = mutable.Map(99->"AAA",88->"BBB",77->"TTT",66->"DDDD",55->"CCC")
+  val unMapaMas = mutable.Map(44->"QQQ",33->"WWW",22->"NNN")
+  println(otroMapa-=88)
+  otroMapa+=(11->"ÑÑÑ")
+  println(otroMapa)
+
+  //Trabajo con recorrido de estructura
+/*
+  nombresX.foreach(x => x.toUpperCase())
+  nombresX.foreach{println}
+*/
+  val nombresXYZ = List("Ana","Angela","Abelardo","Alvaro")
+  val apellidosXYZ = List("Rendon","Mesa","Perez","Restrepo")
+  val data = List(1,2,3,4,5,6,7,8,9)
+
+  for(x <- nombresXYZ if x.endsWith("a")){
+    println(x)
+  }//Lista de compresion
+
+  for(n <-nombresXYZ; p <- apellidosXYZ if n.endsWith("a")){
+    println(s"$n - $p")
+  }//Lista de compresion
+
 
 }
